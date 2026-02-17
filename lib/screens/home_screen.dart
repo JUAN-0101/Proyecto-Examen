@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto/models/gasto.dart';
 import 'package:proyecto/screens/formulario_gastos.dart';
+import 'package:proyecto/screens/grafica.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,11 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(fontSize: 18),
               ),
             )
-          : ListView.builder(
-              itemCount: _gastos.length,
-              itemBuilder: (context, index) {
-                final gasto = _gastos[index];
-
+          : Column(
+              children: [
+                // Llamada al widget de la gráfica pasando la lista actual
+                GraficaBarras(gastos: _gastos),
+              
+                const Divider(),
+              
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _gastos.length,
+                    itemBuilder: (context, index) {
+                      final gasto = _gastos[index]; //
                 return Card(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 12,
@@ -70,7 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 );
-              },
+                },
+                )
+                ),
+              ],
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: _abrirFormulario,
