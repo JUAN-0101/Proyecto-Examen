@@ -38,51 +38,54 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Mis Gastos')),
-      body: _gastos.isEmpty
-          ? const Center(
-              child: Text(
-                'No hay gastos registrados',
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : Column(
-              children: [
-                // Llamada al widget de la gráfica pasando la lista actual
-                GraficaBarras(gastos: _gastos),
-              
-                const Divider(),
-              
-                Expanded(
-                  child: ListView.builder(
+      body: Column(
+        children: [
+          GraficaBarras(gastos: _gastos),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, bottom: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Historial", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),),
+            ),
+          ),
+          Expanded(
+            child: _gastos.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No hay gastos registrados',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  )
+                  : ListView.builder(
                     itemCount: _gastos.length,
                     itemBuilder: (context, index) {
-                      final gasto = _gastos[index]; //
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                      final gasto = _gastos[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            gasto.nombre,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            '${gasto.categoria} - \$${gasto.monto}\n'
+                            'Fecha: ${gasto.fecha.day}/${gasto.fecha.month}/${gasto.fecha.year}',
+                          ),
+                          isThreeLine: true,
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => _eliminarGasto(index),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  child: ListTile(
-                    title: Text(
-                      gasto.nombre,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      '${gasto.categoria} - \$${gasto.monto}\n'
-                      'Fecha: ${gasto.fecha.day}/${gasto.fecha.month}/${gasto.fecha.year}',
-                    ),
-                    isThreeLine: true,
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () => _eliminarGasto(index),
-                    ),
-                  ),
-                );
-                },
-                )
-                ),
-              ],
-            ),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _abrirFormulario,
         child: const Icon(Icons.add),
@@ -90,3 +93,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+        
