@@ -7,6 +7,14 @@ class ListaGastos extends StatelessWidget {
 
   const ListaGastos(this.items, {super.key});
 
+  IconData _getIcono(String cat){
+    if(cat == 'Comida') return Icons.restaurant;
+    if(cat == 'Trasnporte') return Icons.directions_bus;
+    if(cat == 'Entretenimiento') return Icons.movie;
+    if(cat == 'Viaje') return Icons.flight;
+    return Icons.category;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -14,6 +22,7 @@ class ListaGastos extends StatelessWidget {
       itemBuilder: (ctx, i) {
         final gasto = items[i];
         return ListTile(
+          leading: Icon(_getIcono(gasto.categoria), color:const Color.fromARGB(255, 37, 42, 106),),
           title: Text(gasto.nombre),
         subtitle: Text(gasto.categoria),
         trailing: Text('${gasto.monto}'),
