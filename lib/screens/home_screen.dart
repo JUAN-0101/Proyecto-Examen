@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto/models/gasto.dart';
 import 'package:proyecto/screens/formulario_gastos.dart';
 import 'package:proyecto/screens/grafica.dart';
+import 'package:proyecto/screens/tablas.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +13,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Gasto> _gastos = [];
+
+  final Map<String, IconData> _iconos = {
+    'COMIDA': Icons.restaurant,
+    'TRANSPORTE': Icons.directions_bus,
+    'ENTRETENIMIENTO': Icons.movie,
+    'VIAJE': Icons.flight,
+    'OTROS': Icons.star,
+  };
 
   void _abrirFormulario() {
     Navigator.push(
@@ -63,6 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 6,
                   ),
                   child: ListTile(
+                    leading: Icon(
+                            _iconos[gasto.categoria.toUpperCase().trim()] ?? Icons.category,
+                            color: const Color.fromARGB(255, 37, 42, 106),
+                          ),
                     title: Text(
                       gasto.nombre,
                       style: const TextStyle(fontWeight: FontWeight.bold),
