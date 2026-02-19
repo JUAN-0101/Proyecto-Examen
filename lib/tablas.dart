@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto/models/gasto.dart';
 
 class ListaGastos extends StatelessWidget {
 
-  final List<dynamic> items; 
+  final List<Gasto> items; 
 
   const ListaGastos(this.items, {super.key});
 
@@ -10,10 +11,14 @@ class ListaGastos extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: items.length,
-      itemBuilder: (ctx, i) => ListTile(
-        title: Text("Gasto provisional #$i"),
-        subtitle: const Text("Configurando diseño..."),
-      ),
+      itemBuilder: (ctx, i) {
+        final gasto = items[i];
+        return ListTile(
+          title: Text(gasto.nombre),
+        subtitle: Text(gasto.categoria),
+        trailing: Text('${gasto.monto}'),
+        );
+      },
     );
   }
 }
