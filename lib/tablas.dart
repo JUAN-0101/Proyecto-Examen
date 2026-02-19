@@ -9,10 +9,10 @@ class ListaGastos extends StatelessWidget {
 
   IconData _getIcono(String cat){
     String categoria =cat.toUpperCase();
-    if(cat == 'COMIDA') return Icons.restaurant;
-    if(cat == 'TRANSPORTE') return Icons.directions_bus;
-    if(cat == 'ENTRETENIMIENTO') return Icons.movie;
-    if(cat == 'OTROS') return Icons.star;
+    if(categoria == 'COMIDA') return Icons.restaurant;
+    if(categoria == 'TRANSPORTE') return Icons.directions_bus;
+    if(categoria == 'ENTRETENIMIENTO') return Icons.movie;
+    if(categoria == 'OTROS') return Icons.star;
     return Icons.category;
   }
 
