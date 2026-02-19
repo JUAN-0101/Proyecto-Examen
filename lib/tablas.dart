@@ -8,11 +8,11 @@ class ListaGastos extends StatelessWidget {
   const ListaGastos(this.items, {super.key});
 
   IconData _getIcono(String cat){
-    String categoria =cat.toLowerCase();
-    if(cat == 'Comida') return Icons.restaurant;
-    if(cat == 'Trasnporte') return Icons.directions_bus;
-    if(cat == 'Entretenimiento') return Icons.movie;
-    if(cat == 'Otros') return Icons.star;
+    String categoria =cat.toUpperCase();
+    if(cat == 'COMIDA') return Icons.restaurant;
+    if(cat == 'TRANSPORTE') return Icons.directions_bus;
+    if(cat == 'ENTRETENIMIENTO') return Icons.movie;
+    if(cat == 'OTROS') return Icons.star;
     return Icons.category;
   }
 
