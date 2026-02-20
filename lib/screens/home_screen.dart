@@ -72,6 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 6,
                   ),
                   child: ListTile(
+                     leading: Icon(
+                            _iconos[gasto.categoria.toUpperCase().trim()] ?? Icons.category,
+                            color: const Color.fromARGB(255, 37, 42, 106),
+                          ),
                     title: Text(
                       gasto.nombre,
                       style: const TextStyle(fontWeight: FontWeight.bold),
